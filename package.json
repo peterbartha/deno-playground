@@ -8,7 +8,8 @@
     "start": "next start",
     "type-check": "tsc --pretty --noEmit",
     "format": "prettier --write .",
-    "lint": "eslint . --ext .ts,.tsx,.js"
+    "lint": "eslint . --ext .ts,.tsx,.js",
+    "minify-svg": "svgo -f ./public -r"
   },
   "dependencies": {
     "next": "10.1.2",
@@ -31,6 +32,7 @@
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
     "sass": "^1.32.8",
+    "svgo": "^2.3.0",
     "typescript": "^4.2.3"
   },
   "husky": {
@@ -47,6 +49,10 @@
     ],
     "*.@{md,json,yml}": [
       "prettier --write",
+      "git add"
+    ],
+    "*.svg": [
+      "svgo",
       "git add"
     ]
   }
