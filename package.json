@@ -8,7 +8,7 @@
     "start": "next start",
     "type-check": "tsc --pretty --noEmit",
     "format": "prettier --write .",
-    "lint": "eslint . --ext ts --ext tsx --ext js"
+    "lint": "eslint . --ext .ts,.tsx,.js"
   },
   "dependencies": {
     "next": "10.1.2",
@@ -27,7 +27,26 @@
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^1.7.0",
+    "husky": "^6.0.0",
+    "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
     "typescript": "^4.2.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.@(ts|tsx|js)": [
+      "npm run type-check",
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "*.@{md,json,yml}": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }
