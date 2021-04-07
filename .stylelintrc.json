@@ -1,0 +1,7 @@
+{
+  "extends": "stylelint-config-primer",
+  "ignoreFiles": ["**/*.tsx", "**/*.ts"],
+  "rules": {
+    "selector-max-type": 1
+  }
+}

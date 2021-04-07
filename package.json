@@ -9,6 +9,7 @@
     "type-check": "tsc --pretty --noEmit",
     "format": "prettier --write .",
     "lint": "eslint . --ext .ts,.tsx,.js",
+    "stylelint": "npx stylelint --syntax scss **/*.scss",
     "minify-svg": "svgo -f ./public -r"
   },
   "dependencies": {
@@ -17,6 +18,7 @@
     "react-dom": "17.0.2"
   },
   "devDependencies": {
+    "@primer/css": "^16.2.0",
     "@types/react": "^17.0.3",
     "@typescript-eslint/eslint-plugin": "^4.21.0",
     "@typescript-eslint/parser": "^4.21.0",
@@ -32,6 +34,8 @@
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
     "sass": "^1.32.8",
+    "stylelint": "^13.12.0",
+    "stylelint-config-primer": "^11.0.1",
     "svgo": "^2.3.0",
     "typescript": "^4.2.3"
   },
@@ -49,6 +53,10 @@
     ],
     "*.@{md,json,yml}": [
       "prettier --write",
+      "git add"
+    ],
+    "*.scss": [
+      "npx stylelint --syntax scss --fix",
       "git add"
     ],
     "*.svg": [
