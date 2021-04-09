@@ -1,0 +1,38 @@
+.header {
+  display: flex;
+  width: 100%;
+
+  .navbar {
+    width: 100%;
+    padding: 8px 1rem;
+  }
+
+  .deno {
+    display: inline-flex;
+    align-items: center;
+
+    img {
+      height: 48px;
+    }
+
+    .title {
+      display: flex;
+      margin-left: 15px;
+      flex-direction: column;
+    }
+
+    h1,
+    h2 {
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 24px;
+    }
+
+    h2 {
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+}
