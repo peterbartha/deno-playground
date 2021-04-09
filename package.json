@@ -13,6 +13,9 @@
     "minify-svg": "svgo -f ./public -r"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@monaco-editor/react": "^4.1.1",
+    "monaco-editor": "^0.21.3",
     "next": "10.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2"
