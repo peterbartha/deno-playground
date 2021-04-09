@@ -1,0 +1,41 @@
+@use './variables' as *;
+
+// More about Variable Fonts: https://web.dev/variable-fonts/
+
+// Inter (body)
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  font-named-instance: 'Regular';
+  src: url('../../public/fonts/Inter/Inter-roman.var.woff2?')
+      format('woff2 supports variations'),
+    url('../../public/fonts/Inter/Inter-roman.var.woff2?')
+      format('woff2-variations');
+}
+
+@font-face {
+  font-family: Inter;
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  font-named-instance: 'Italic';
+  src: url('../../public/fonts/Inter/Inter-italic.var.woff2?')
+      format('woff2 supports variations'),
+    url('../../public/fonts/Inter/Inter-italic.var.woff2?')
+      format('woff2-variations');
+}
+
+// Cascadia Code (console)
+@font-face {
+  font-family: 'Cascadia Code';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  font-named-instance: 'Regular';
+  src: url('../../public/fonts/Cascadia/CascadiaCode.woff2')
+      format('woff2 supports variations'),
+    url('../../public/fonts/Cascadia/CascadiaCode.woff2')
+      format('woff2-variations');
+}
