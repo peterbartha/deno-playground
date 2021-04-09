@@ -1,10 +1,14 @@
+@use "./abstracts/variables" as *;
+@use "./abstracts/typography";
+
+@import './abstracts/fonts';
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family:
- -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  @include typography.typography-level(typography.$config, body);
+  color: $deno-black;
 }
 
 a {
@@ -14,4 +18,12 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+h1 {
+  @include typography.short-typography-level(typography.$config, title);
+}
+
+h2 {
+  @include typography.short-typography-level(typography.$config, subtitle);
 }
