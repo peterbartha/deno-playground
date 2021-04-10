@@ -7,7 +7,7 @@ import {
   Switch,
   ThemeProvider,
 } from '@material-ui/core';
-import { PlayArrow } from '@material-ui/icons';
+import { ExpandMore, PlayArrow } from '@material-ui/icons';
 import React from 'react';
 import styles from '../styles/Toolbar.module.scss';
 
@@ -84,6 +84,7 @@ const Toolbar = (): JSX.Element => {
         onClick={handleOpenShareMenu}
         variant="contained"
         color="primary"
+        endIcon={<ExpandMore />}
       >
         Export
       </Button>
@@ -120,6 +121,7 @@ const Toolbar = (): JSX.Element => {
         onClick={handleClick}
         variant="outlined"
         color="primary"
+        endIcon={<ExpandMore />}
       >
         Examples
       </Button>
