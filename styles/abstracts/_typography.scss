@@ -26,17 +26,15 @@
 @function define-typography-config(
   $font-family:
     'Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
-  $body: define-typography-level(16px, 1.25rem, $font-regular),
-  $title: define-typography-level(1.875rem, 2.35rem, $font-bold),
-  $subtitle: define-typography-level(1rem, 1.25rem, $font-regular),
-  $subheading: define-typography-level(1.25rem, 1.875rem, $font-semibold)
+  $body: define-typography-level(1.4rem, 1.4, $font-regular),
+  $title: define-typography-level(3rem, 1.2, $font-bold),
+  $subtitle: define-typography-level(1.6rem, 1.2, $font-regular)
 ) {
   // Declare an initial map with all of the levels.
   $config: (
     body: $body,
     title: $title,
     subtitle: $subtitle,
-    subheading: $subheading,
   );
 
   // Loop through the levels and set the `font-family` of the ones that don't have one to the base.
@@ -166,5 +164,5 @@ $config: define-typography-config();
 
 @mixin console() {
   $font-family: '"Cascadia Code", monospace';
-  @include font-shorthand(0.8rem, $font-regular, 1.2rem, #{$font-family});
+  @include font-shorthand(1.4rem, $font-regular, 1.4, #{$font-family});
 }

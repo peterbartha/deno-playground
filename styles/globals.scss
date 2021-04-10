@@ -7,6 +7,7 @@ html {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 10px; // a good choice when using "rem" units
 }
 
 *,
@@ -19,11 +20,12 @@ html,
 body {
   padding: 0;
   margin: 0;
-  @include typography.typography-level(typography.$config, body);
-  color: $deno-black;
 }
 
 body {
+  @include typography.typography-level(typography.$config, body);
+  color: $deno-black;
+
   @media print {
     background-color: #fff;
   }

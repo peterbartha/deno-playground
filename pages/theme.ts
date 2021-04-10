@@ -26,6 +26,7 @@ const theme = createMuiTheme({
     },
   },
   typography: {
+    fontSize: 16,
     fontFamily: [
       'Inter',
       'system-ui',
@@ -37,7 +38,14 @@ const theme = createMuiTheme({
       'sans-serif',
     ].join(','),
     button: {
+      fontSize: '1.4rem',
       textTransform: 'none',
+    },
+    body1: {
+      fontSize: '1.4rem',
+    },
+    subtitle2: {
+      fontSize: '1.4rem',
     },
   },
 });
