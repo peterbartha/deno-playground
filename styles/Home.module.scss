@@ -19,21 +19,16 @@
   align-items: center;
 }
 
-.settings {
-  width: 100%;
-  padding: 1rem 0;
-}
-
 .playground {
   display: flex;
   width: 100%;
-  padding: 1rem;
+  padding: 2rem;
   overflow: hidden;
   flex-direction: row;
   background: #f4f5f7;
   border-top: 1px solid $deno-separator;
   flex: 1;
-  gap: 2rem;
+  gap: 4rem;
 }
 
 .code,
@@ -60,7 +55,7 @@
     @include typography.console();
     height: 100%;
     max-height: 100%;
-    padding: 1rem;
+    padding: 1rem 1.5rem;
     overflow-y: auto;
     background-color: $deno-bg;
     border: 1px solid $deno-separator;
