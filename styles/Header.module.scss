@@ -1,10 +1,13 @@
+@use "./abstracts/variables" as *;
+
 .header {
-  display: flex;
   width: 100%;
 
   .navbar {
+    display: flex;
     width: 100%;
     padding: 8px 2rem;
+    align-items: center;
   }
 
   .deno {
@@ -25,5 +28,13 @@
     h2 {
       margin: 0;
     }
+  }
+
+  .placeholder {
+    flex: 1;
+  }
+
+  .iconButton {
+    color: $deno-black;
   }
 }
