@@ -21,7 +21,6 @@
 }
 
 // Represents a collection of typography levels.
-// Defaults come from https://material.io/guidelines/style/typography.html
 // Note: The spec doesn't mention letter spacing. The values here come from
 // eyeballing it until it looked exactly like the spec examples.
 @function define-typography-config(

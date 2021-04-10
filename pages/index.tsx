@@ -1,11 +1,11 @@
-import { Button } from '@material-ui/core';
+import { Button, Checkbox } from '@material-ui/core';
 import Editor from '@monaco-editor/react';
 import Head from 'next/head';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import styles from '../styles/Home.module.scss';
 
-export default function Home() {
+export default function Home(): JSX.Element {
   return (
     <div className={styles.container}>
       <Head>
@@ -17,7 +17,26 @@ export default function Home() {
 
       <main className={styles.main}>
         <div className={styles.settings}>
-          <Button>asd</Button>
+          <Button variant="contained" color="primary">
+            Run
+          </Button>
+          <Button variant="contained" color="primary">
+            Format
+          </Button>
+
+          <Button variant="contained" color="primary">
+            Share
+          </Button>
+
+          <Button variant="outlined" color="secondary">
+            Secondary
+          </Button>
+
+          <Checkbox
+            defaultChecked
+            color="primary"
+            inputProps={{ 'aria-label': 'secondary checkbox' }}
+          />
         </div>
         <div className={styles.playground}>
           <section className={styles.code}>

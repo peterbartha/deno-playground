@@ -3,6 +3,18 @@
 
 @import './abstracts/fonts';
 
+html {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
 html,
 body {
   padding: 0;
@@ -11,13 +23,19 @@ body {
   color: $deno-black;
 }
 
+body {
+  @media print {
+    background-color: #fff;
+  }
+
+  &::backdrop {
+    background-color: #fff;
+  }
+}
+
 a {
   color: inherit;
   text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 h1 {
