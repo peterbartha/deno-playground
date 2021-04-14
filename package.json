@@ -6,5 +6,17 @@
   "author": "Peter Bartha <mail@peterbartha.com>",
   "license": "MIT",
   "private": true,
-  "workspaces": ["packages/*"]
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "prepare": "husky install",
+    "precommit:functions": "cd packages/functions && npm run precommit",
+    "precommit:ui": "cd packages/ui && npm run precommit",
+    "precommit": "yarn run precommit:functions && yarn run precommit:ui"
+  },
+  "devDependencies": {
+    "husky": "^6.0.0",
+    "lint-staged": "^10.5.4"
+  }
 }

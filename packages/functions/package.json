@@ -8,9 +8,17 @@
   "private": true,
   "scripts": {
     "start": "vercel dev",
-    "deploy": "vercel deploy --prod"
+    "deploy": "vercel deploy --prod",
+    "precommit": "lint-staged"
   },
   "devDependencies": {
+    "lint-staged": "^10.5.4",
     "vercel-deno": "^0.7.9"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "deno fmt",
+      "deno --unstable lint"
+    ]
   }
 }
