@@ -1,4 +1,4 @@
-import { ServerRequest } from "https://deno.land/std@0.93.0/http/server.ts";
+import { ServerRequest } from "../deps.ts";
 import { decodeRequestBody } from "../services/decoder.ts";
 import {
   executeCommand,
