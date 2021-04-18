@@ -1,46 +1,9 @@
-import {
-  Button,
-  createMuiTheme,
-  FormControlLabel,
-  Menu,
-  MenuItem,
-  Switch,
-  ThemeProvider,
-} from '@material-ui/core';
-import { ExpandMore, PlayArrow } from '@material-ui/icons';
+import { Button, createMuiTheme, ThemeProvider } from '@material-ui/core';
+import { PlayArrow } from '@material-ui/icons';
 import React from 'react';
 import styles from '../styles/Toolbar.module.scss';
 
 const Toolbar = (): JSX.Element => {
-  const [state, setState] = React.useState({
-    checkedA: true,
-    checkedB: true,
-  });
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [shareAnchor, setShareAnchor] = React.useState<null | HTMLElement>(
-    null
-  );
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleOpenShareMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setShareAnchor(event.currentTarget);
-  };
-
-  const handleShareClose = () => {
-    setShareAnchor(null);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   const theme = createMuiTheme({
     palette: {
       primary: {
@@ -78,6 +41,7 @@ const Toolbar = (): JSX.Element => {
         Format
       </Button>
 
+      {/*
       <Button
         aria-controls="simple-menu"
         aria-haspopup="true"
@@ -158,6 +122,7 @@ const Toolbar = (): JSX.Element => {
       >
         Deno v1.8.3
       </a>
+      */}
     </menu>
   );
 };
