@@ -1,7 +1,7 @@
 import { ServerRequest } from "../deps.ts";
 import { SupportedDenoSubCommand } from "../interface.ts";
 import { executeCommand } from "../services/denoService.ts";
-import { decodeRequestBody, sanitizeStderrOutput } from "../utils/utils.ts";
+import { decodeRequestBody } from "../utils/utils.ts";
 
 export async function handleDenoCommand(
   commandType: SupportedDenoSubCommand,
@@ -39,7 +39,7 @@ export async function handleDenoCommand(
       }
       return request.respond({
         status: 500,
-        body: sanitizeStderrOutput(new TextDecoder().decode(stderr)),
+        body: new TextDecoder().decode(stderr),
       });
     }
     return request.respond({

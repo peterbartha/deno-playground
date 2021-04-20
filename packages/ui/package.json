@@ -11,7 +11,7 @@
     "build": "next build",
     "start": "next start",
     "deploy": "vercel deploy --prod",
-    "type-check": "tsc --pretty --esModuleInterop --jsx preserve --noEmit next-env.d.ts",
+    "type-check": "tsc --pretty --allowJS --esModuleInterop --jsx preserve --noEmit next-env.d.ts",
     "format": "prettier --write .",
     "lint": "eslint . --ext .ts,.tsx,.js",
     "stylelint": "stylelint --syntax scss **/*.scss",
