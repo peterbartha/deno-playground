@@ -1,11 +1,36 @@
 import Editor from '@monaco-editor/react';
 import Head from 'next/head';
+import React, { useRef, useState } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Toolbar from '../components/Toolbar';
+import format from '../services/formatter';
+import run from '../services/run';
 import styles from '../styles/Home.module.scss';
 
 export default function Home(): JSX.Element {
+  const [source, setSource] = useState<string>('');
+  const [console, setConsole] = useState<string>('');
+  const sanitizeHelper = useRef<HTMLParagraphElement | null>(null);
+
+  function handleEditorChange(value: string | undefined) {
+    setSource(value || '');
+  }
+
+  async function handleRun() {
+    const response = await run(source);
+    setConsole(response);
+  }
+
+  function createSafeMarkup(): { __html: string } {
+    const sanitizer = sanitizeHelper.current;
+    if (!sanitizer) {
+      return { __html: '' };
+    }
+    sanitizer.innerText = console;
+    return { __html: format(sanitizer.innerHTML) };
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -16,131 +41,21 @@ export default function Home(): JSX.Element {
       <Header />
 
       <main className={styles.main}>
-        <Toolbar />
+        <Toolbar onRun={handleRun} />
         <div className={styles.playground}>
           <section className={styles.code}>
             <Editor
               height="100%"
               defaultLanguage="typescript"
-              defaultValue="// some comment"
+              defaultValue=""
+              onChange={handleEditorChange}
             />
           </section>
           <section className={styles.console}>
             <h2>Console output:</h2>
-            <samp>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam
-              ad repellendus ex. Minima accusantium facere, qui incidunt fugit
-              natus atque possimus. Explicabo accusantium porro quas vero cum
-              odit eius similique! Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit. Quisquam ad repellendus ex. Minima accusantium
-              facere, qui incidunt fugit natus atque possimus. Explicabo
-              accusantium porro quas vero cum odit eius similique! Lorem ipsum
-              dolor sit amet, consectetur adipisicing elit. Quisquam ad
-              repellendus ex. Minima accusantium facere, qui incidunt fugit
-              natus atque possimus. Explicabo accusantium porro quas vero cum
-              odit eius similique! Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit. Quisquam ad repellendus ex. Minima accusantium
-              facere, qui incidunt fugit natus atque possimus. Explicabo
-              accusantium porro quas vero cum odit eius similique! Lorem ipsum
-              dolor sit amet, consectetur adipisicing elit. Quisquam ad
-              repellendus ex. Minima accusantium facere, qui incidunt fugit
-              natus atque possimus. Explicabo accusantium porro quas vero cum
-              odit eius similique! Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit. Quisquam ad repellendus ex. Minima accusantium
-              facere, qui incidunt fugit natus atque possimus. Explicabo
-              accusantium porro quas vero cum odit eius similique! Lorem ipsum
-              dolor sit amet, consectetur adipisicing elit. Quisquam ad
-              repellendus ex. Minima accusantium facere, qui incidunt fugit
-              natus atque possimus. Explicabo accusantium porro quas vero cum
-              odit eius similique! Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit. Quisquam ad repellendus ex. Minima accusantium
-              facere, qui incidunt fugit natus atque possimus. Explicabo
-              accusantium porro quas vero cum odit eius similique! Lorem ipsum
-              dolor sit amet, consectetur adipisicing elit. Quisquam ad
-              repellendus ex. Minima accusantium facere, qui incidunt fugit
-              natus atque possimus. Explicabo accusantium porro quas vero cum
-              odit eius similique! Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit. Quisquam ad repellendus ex. Minima accusantium
-              facere, qui incidunt fugit natus atque possimus. Explicabo
-              accusantium porro quas vero cum odit eius similique! Lorem ipsum
-              dolor sit amet, consectetur adipisicing elit. Quisquam ad
-              repellendus ex. Minima accusantium facere, qui incidunt fugit
-              natus atque possimus. Explicabo accusantium porro quas vero cum
-              odit eius similique! Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit. Quisquam ad repellendus ex. Minima accusantium
-              facere, qui incidunt fugit natus atque possimus. Explicabo
-              accusantium porro quas vero cum odit eius similique! Lorem ipsum
-              dolor sit amet, consectetur adipisicing elit. Quisquam ad
-              repellendus ex. Minima accusantium facere, qui incidunt fugit
-              natus atque possimus. Explicabo accusantium porro quas vero cum
-              odit eius similique! Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit. Quisquam ad repellendus ex. Minima accusantium
-              facere, qui incidunt fugit natus atque possimus. Explicabo
-              accusantium porro quas vero cum odit eius similique! Lorem ipsum
-              dolor sit amet, consectetur adipisicing elit. Quisquam ad
-              repellendus ex. Minima accusantium facere, qui incidunt fugit
-              natus atque possimus. Explicabo accusantium porro quas vero cum
-              odit eius similique! Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit. Quisquam ad repellendus ex. Minima accusantium
-              facere, qui incidunt fugit natus atque possimus. Explicabo
-              accusantium porro quas vero cum odit eius similique! Lorem ipsum
-              dolor sit amet, consectetur adipisicing elit. Quisquam ad
-              repellendus ex. Minima accusantium facere, qui incidunt fugit
-              natus atque possimus. Explicabo accusantium porro quas vero cum
-              odit eius similique! Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit. Quisquam ad repellendus ex. Minima accusantium
-              facere, qui incidunt fugit natus atque possimus. Explicabo
-              accusantium porro quas vero cum odit eius similique! Lorem ipsum
-              dolor sit amet, consectetur adipisicing elit. Quisquam ad
-              repellendus ex. Minima accusantium facere, qui incidunt fugit
-              natus atque possimus. Explicabo accusantium porro quas vero cum
-              odit eius similique! Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit. Quisquam ad repellendus ex. Minima accusantium
-              facere, qui incidunt fugit natus atque possimus. Explicabo
-              accusantium porro quas vero cum odit eius similique! Lorem ipsum
-              dolor sit amet, consectetur adipisicing elit. Quisquam ad
-              repellendus ex. Minima accusantium facere, qui incidunt fugit
-              natus atque possimus. Explicabo accusantium porro quas vero cum
-              odit eius similique! Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit. Quisquam ad repellendus ex. Minima accusantium
-              facere, qui incidunt fugit natus atque possimus. Explicabo
-              accusantium porro quas vero cum odit eius similique! Lorem ipsum
-              dolor sit amet, consectetur adipisicing elit. Quisquam ad
-              repellendus ex. Minima accusantium facere, qui incidunt fugit
-              natus atque possimus. Explicabo accusantium porro quas vero cum
-              odit eius similique! Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit. Quisquam ad repellendus ex. Minima accusantium
-              facere, qui incidunt fugit natus atque possimus. Explicabo
-              accusantium porro quas vero cum odit eius similique! Lorem ipsum
-              dolor sit amet, consectetur adipisicing elit. Quisquam ad
-              repellendus ex. Minima accusantium facere, qui incidunt fugit
-              natus atque possimus. Explicabo accusantium porro quas vero cum
-              odit eius similique! Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit. Quisquam ad repellendus ex. Minima accusantium
-              facere, qui incidunt fugit natus atque possimus. Explicabo
-              accusantium porro quas vero cum odit eius similique! Lorem ipsum
-              dolor sit amet, consectetur adipisicing elit. Quisquam ad
-              repellendus ex. Minima accusantium facere, qui incidunt fugit
-              natus atque possimus. Explicabo accusantium porro quas vero cum
-              odit eius similique! Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit. Quisquam ad repellendus ex. Minima accusantium
-              facere, qui incidunt fugit natus atque possimus. Explicabo
-              accusantium porro quas vero cum odit eius similique! Lorem ipsum
-              dolor sit amet, consectetur adipisicing elit. Quisquam ad
-              repellendus ex. Minima accusantium facere, qui incidunt fugit
-              natus atque possimus. Explicabo accusantium porro quas vero cum
-              odit eius similique! Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit. Quisquam ad repellendus ex. Minima accusantium
-              facere, qui incidunt fugit natus atque possimus. Explicabo
-              accusantium porro quas vero cum odit eius similique! Lorem ipsum
-              dolor sit amet, consectetur adipisicing elit. Quisquam ad
-              repellendus ex. Minima accusantium facere, qui incidunt fugit
-              natus atque possimus. Explicabo accusantium porro quas vero cum
-              odit eius similique! Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit. Quisquam ad repellendus ex. Minima accusantium
-              facere, qui incidunt fugit natus atque possimus. Explicabo
-              accusantium porro quas vero cum odit eius similique!
-            </samp>
+            <p ref={sanitizeHelper} className={styles.sanitizer} />
+            {/* eslint-disable-next-line react/no-danger */}
+            <samp dangerouslySetInnerHTML={createSafeMarkup()} />
           </section>
         </div>
       </main>

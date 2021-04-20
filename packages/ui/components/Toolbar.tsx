@@ -3,7 +3,16 @@ import { PlayArrow } from '@material-ui/icons';
 import React from 'react';
 import styles from '../styles/Toolbar.module.scss';
 
-const Toolbar = (): JSX.Element => {
+type Props = {
+  onRun: () => void;
+};
+
+const Toolbar = ({ onRun }: Props): JSX.Element => {
+  function handleRun(event: React.MouseEvent<HTMLButtonElement>) {
+    event.stopPropagation();
+    onRun();
+  }
+
   const theme = createMuiTheme({
     palette: {
       primary: {
@@ -32,7 +41,12 @@ const Toolbar = (): JSX.Element => {
   return (
     <menu className={styles.toolbar}>
       <ThemeProvider theme={theme}>
-        <Button variant="contained" color="primary" startIcon={<PlayArrow />}>
+        <Button
+          onClick={handleRun}
+          variant="contained"
+          color="primary"
+          startIcon={<PlayArrow />}
+        >
           Run
         </Button>
       </ThemeProvider>

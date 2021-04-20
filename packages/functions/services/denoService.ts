@@ -1,4 +1,4 @@
-export type SupportedDenoSubCommand = "run" | "fmt" | "lint";
+import { SupportedDenoSubCommand } from "../interface.ts";
 
 // Vercel timeout is 10 seconds for hobby tier:
 // https://vercel.com/docs/platform/limits

@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3001",
+    "dev": "node ./scripts/server.js",
     "build": "next build",
     "start": "next start",
     "deploy": "vercel deploy --prod",
@@ -23,6 +23,7 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@monaco-editor/react": "^4.1.1",
+    "ansi-style-parser": "^3.0.0",
     "monaco-editor": "^0.23.0",
     "next": "^10.1.3",
     "react": "^17.0.2",

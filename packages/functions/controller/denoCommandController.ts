@@ -1,15 +1,14 @@
 import { ServerRequest } from "../deps.ts";
-import { decodeRequestBody } from "../services/decoder.ts";
-import {
-  executeCommand,
-  SupportedDenoSubCommand,
-} from "../services/denoService.ts";
+import { SupportedDenoSubCommand } from "../interface.ts";
+import { executeCommand } from "../services/denoService.ts";
+import { decodeRequestBody, sanitizeStderrOutput } from "../utils/utils.ts";
 
 export async function handleDenoCommand(
   commandType: SupportedDenoSubCommand,
   request: ServerRequest,
 ) {
   const { method, body: encodedBody, url } = request;
+
   if (method !== "POST") {
     return request.respond({
       status: 405,
@@ -34,7 +33,7 @@ export async function handleDenoCommand(
       }
       return request.respond({
         status: 500,
-        body: new TextDecoder().decode(stderr),
+        body: sanitizeStderrOutput(new TextDecoder().decode(stderr)),
       });
     }
     return request.respond({

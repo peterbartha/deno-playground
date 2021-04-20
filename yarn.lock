@@ -690,6 +690,13 @@ ansi-regex@^5.0.0:
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-5.0.0.tgz#388539f55179bf39339c81af30a654d69f87cb75"
   integrity sha512-bY6fj56OUQ0hU1KjFNDQuJFezqKdrAyFdIevADiqrWHwSlbmBNMHp5ak2f40Pm8JTFyM2mqxkG6ngkHO11f/lg==
 
+ansi-style-parser@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/ansi-style-parser/-/ansi-style-parser-3.0.0.tgz#2a44a75039032c07f41d7ed04f9b414c45c6fa89"
+  integrity sha512-dIrAK6vp4J61qIqWK9gulJhRtWUoIO9YD40I8UGKcW/H23CIUQv7c4ZDyj93FtBZa8YwhFMrWx4JvjgDM/G6Yw==
+  dependencies:
+    ansi-regex "^5.0.0"
+
 ansi-styles@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-3.2.1.tgz#41fbb20243e50b12be0f04b8dedbf07520ce841d"
