@@ -1,6 +1,10 @@
 import { SupportedDenoSubCommand } from '../../functions/interface';
 
-const API_URL = 'https://deno-playground-api-peterbartha.vercel.app/api';
+const API_URL = `${
+  window.location.origin.includes('localhost')
+    ? 'http://localhost:3000'
+    : 'https://deno-playground-api.vercel.app'
+}/api`;
 
 export type SupportedRequestPath = SupportedDenoSubCommand | string;
 

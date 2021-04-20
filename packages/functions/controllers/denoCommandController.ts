@@ -9,6 +9,12 @@ export async function handleDenoCommand(
 ) {
   const { method, body: encodedBody, url } = request;
 
+  if (method === "OPTIONS") {
+    return request.respond({
+      status: 200,
+    });
+  }
+
   if (method !== "POST") {
     return request.respond({
       status: 405,
