@@ -5,12 +5,17 @@ import styles from '../styles/Toolbar.module.scss';
 
 type Props = {
   onRun: () => void;
+  onFormat: () => void;
 };
 
-const Toolbar = ({ onRun }: Props): JSX.Element => {
+const Toolbar = ({ onRun, onFormat }: Props): JSX.Element => {
   function handleRun(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
     onRun();
+  }
+  function handleFormat(event: React.MouseEvent<HTMLButtonElement>) {
+    event.stopPropagation();
+    onFormat();
   }
 
   const theme = createMuiTheme({
@@ -51,7 +56,7 @@ const Toolbar = ({ onRun }: Props): JSX.Element => {
         </Button>
       </ThemeProvider>
 
-      <Button variant="contained" color="primary">
+      <Button onClick={handleFormat} variant="contained" color="primary">
         Format
       </Button>
 

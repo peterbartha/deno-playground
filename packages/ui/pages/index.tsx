@@ -4,6 +4,7 @@ import React, { useRef, useState } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Toolbar from '../components/Toolbar';
+import fmt from '../services/fmt';
 import format from '../services/formatter';
 import run from '../services/run';
 import styles from '../styles/Home.module.scss';
@@ -20,6 +21,11 @@ export default function Home(): JSX.Element {
   async function handleRun() {
     const response = await run(source);
     setConsole(response);
+  }
+
+  async function handleFormat() {
+    const formattedSource = await fmt(source);
+    setSource(formattedSource);
   }
 
   function createSafeMarkup(): { __html: string } {
@@ -41,13 +47,14 @@ export default function Home(): JSX.Element {
       <Header />
 
       <main className={styles.main}>
-        <Toolbar onRun={handleRun} />
+        <Toolbar onRun={handleRun} onFormat={handleFormat} />
         <div className={styles.playground}>
           <section className={styles.code}>
             <Editor
               height="100%"
               defaultLanguage="typescript"
               defaultValue=""
+              value={source}
               onChange={handleEditorChange}
             />
           </section>
