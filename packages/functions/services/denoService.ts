@@ -1,3 +1,4 @@
+import { writeAll } from "../deps.ts";
 import { SupportedDenoSubCommand } from "../interface.ts";
 
 // Vercel timeout is 10 seconds for hobby tier:
@@ -11,8 +12,8 @@ export function executeCommand(
 ): Promise<{
   isSuccess: boolean;
   isKilled: boolean;
-  stdout: BufferSource;
-  stderr: BufferSource;
+  out: string;
+  error: string;
 }> {
   const command = new Set(["deno", commandType]);
 
@@ -33,40 +34,43 @@ async function execute(
 ): Promise<{
   isSuccess: boolean;
   isKilled: boolean;
-  stdout: BufferSource;
-  stderr: BufferSource;
+  out: string;
+  error: string;
 }> {
+  let isKilled = false;
   // https://deno.land/manual@main/examples/subprocess
-  const process = Deno.run({
+  const deno = Deno.run({
     cmd,
     stdin: "piped",
     stdout: "piped",
     stderr: "piped",
   });
 
-  const encoder = new TextEncoder();
-  await process.stdin.write(encoder.encode(source));
-  process.stdin.close();
+  try {
+    await writeAll(deno.stdin, new TextEncoder().encode(source));
+    deno.stdin.close();
 
-  let isKilled = false;
-  const timer = setTimeout(() => {
-    isKilled = true;
-    process.kill(Deno.Signal.SIGKILL);
-  }, PROCESS_TIMEOUT);
+    const timer = setTimeout(() => {
+      isKilled = true;
+      deno.kill(Deno.Signal.SIGKILL);
+    }, PROCESS_TIMEOUT);
 
-  const [status, stdout, stderr] = await Promise.all([
-    process.status(),
-    process.output(),
-    process.stderrOutput(),
-  ]);
+    const [status, stdout, stderr] = await Promise.all([
+      deno.status(),
+      deno.output(),
+      deno.stderrOutput(),
+    ]);
 
-  clearTimeout(timer);
-  process.close();
+    clearTimeout(timer);
 
-  return {
-    isSuccess: status.success,
-    isKilled,
-    stdout,
-    stderr,
-  };
+    const decoder = new TextDecoder();
+    return {
+      isSuccess: status.success,
+      isKilled,
+      out: decoder.decode(stdout),
+      error: decoder.decode(stderr),
+    };
+  } finally {
+    deno.close();
+  }
 }

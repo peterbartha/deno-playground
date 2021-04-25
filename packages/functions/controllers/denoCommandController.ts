@@ -24,7 +24,7 @@ export async function handleDenoCommand(
 
   try {
     const body = await decodeRequestBody(encodedBody);
-    const { isSuccess, isKilled, stdout, stderr } = await executeCommand(
+    const { isSuccess, isKilled, out, error } = await executeCommand(
       commandType,
       body,
       url,
@@ -39,12 +39,12 @@ export async function handleDenoCommand(
       }
       return request.respond({
         status: 500,
-        body: new TextDecoder().decode(stderr),
+        body: error,
       });
     }
     return request.respond({
       status: 200,
-      body: new TextDecoder().decode(stdout),
+      body: out,
     });
   } catch (e) {
     if (e instanceof SyntaxError) {

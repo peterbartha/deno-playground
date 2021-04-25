@@ -5033,10 +5033,10 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-vercel-deno@^0.7.9:
-  version "0.7.9"
-  resolved "https://registry.yarnpkg.com/vercel-deno/-/vercel-deno-0.7.9.tgz#2d3613563ff53b17311afe76a111690560d5731b"
-  integrity sha512-8TA3VgbCs0BxQGbjvNTrdjPl9WhMSxBn1s/CVCO3V19SrQHx53tj4QNWwPKMuL23J5H1eIYdDyRo073rLd+v8A==
+vercel-deno@0.7.10:
+  version "0.7.10"
+  resolved "https://registry.yarnpkg.com/vercel-deno/-/vercel-deno-0.7.10.tgz#af286950274e5a14642ab6ae1f0c72f9e12652d4"
+  integrity sha512-ffmA3CMGJ2+WzSeHiie32Pka9MzAymi0NX9kCj1DrG9n5mH1qGvyCuA9VwbyJcJWp7+eoxXWWM8IiuQTBgQDrg==
   dependencies:
     "@tootallnate/once" "^1.1.2"
     yn "^4.0.0"
