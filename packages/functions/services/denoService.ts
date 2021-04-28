@@ -41,6 +41,9 @@ async function execute(
   // https://deno.land/manual@main/examples/subprocess
   const deno = Deno.run({
     cmd,
+    env: {
+      DENO_DIR: "/tmp/.deno",
+    },
     stdin: "piped",
     stdout: "piped",
     stderr: "piped",
