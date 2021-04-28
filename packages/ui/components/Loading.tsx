@@ -1,10 +1,14 @@
+type Props = {
+  className: string;
+};
+
 /**
  * https://github.com/denoland/doc_website/blob/0a9fa9d929ddcee16b647d889c9b182fa94832cf/components/Loading.tsx
  */
-export default function Loading(): JSX.Element {
+export default function Loading({ className }: Props): JSX.Element {
   return (
     <svg
-      className="container"
+      className={`container ${className}`}
       viewBox="0 0 580 460"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

@@ -4,6 +4,7 @@ import Head from 'next/head';
 import React, { useRef, useState } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import Loading from '../components/Loading';
 import Toolbar from '../components/Toolbar';
 import fmt from '../services/fmt';
 import format from '../services/formatter';
@@ -13,10 +14,10 @@ import styles from '../styles/Home.module.scss';
 export default function Home(): JSX.Element {
   const [sourceCode, setSourceCode] = useState<string>('');
   const [console, setConsole] = useState<string>('');
+  const [processing, setProcessing] = useState<boolean>(false);
   const sanitizeHelper = useRef<HTMLParagraphElement | null>(null);
 
   function handleEditorDidMount() {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [_, hash] = window.location.hash.split('#');
     const params = new URLSearchParams(hash);
     const compressedCode = params.get('code');
@@ -44,13 +45,17 @@ export default function Home(): JSX.Element {
   }
 
   async function handleRun() {
+    setProcessing(true);
     const response = await run(sourceCode);
     setConsole(response);
+    setProcessing(false);
   }
 
   async function handleFormat() {
+    setProcessing(true);
     const formattedSource = await fmt(sourceCode);
     setSourceCode(formattedSource);
+    setProcessing(false);
   }
 
   function createSafeMarkup(): { __html: string } {
@@ -89,6 +94,7 @@ export default function Home(): JSX.Element {
             <p ref={sanitizeHelper} className={styles.sanitizer} />
             {/* eslint-disable-next-line react/no-danger */}
             <samp dangerouslySetInnerHTML={createSafeMarkup()} />
+            {processing ? <Loading className={styles.loading} /> : null}
           </section>
         </div>
       </main>

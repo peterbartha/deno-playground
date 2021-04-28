@@ -47,6 +47,7 @@
 }
 
 .console {
+  position: relative;
   display: flex;
   flex-direction: column;
 
@@ -64,5 +65,12 @@
     background-color: $deno-bg;
     border: 1px solid $deno-separator;
     border-radius: $border-radius;
+  }
+
+  .loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
