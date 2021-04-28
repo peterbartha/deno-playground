@@ -1,4 +1,5 @@
 import Editor from '@monaco-editor/react';
+import lzstring from 'lz-string';
 import Head from 'next/head';
 import React, { useRef, useState } from 'react';
 import Footer from '../components/Footer';
@@ -10,22 +11,46 @@ import run from '../services/run';
 import styles from '../styles/Home.module.scss';
 
 export default function Home(): JSX.Element {
-  const [source, setSource] = useState<string>('');
+  const [sourceCode, setSourceCode] = useState<string>('');
   const [console, setConsole] = useState<string>('');
   const sanitizeHelper = useRef<HTMLParagraphElement | null>(null);
 
+  function handleEditorDidMount() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [_, hash] = window.location.hash.split('#');
+    const params = new URLSearchParams(hash);
+    const compressedCode = params.get('code');
+    if (compressedCode) {
+      const code = lzstring.decompressFromEncodedURIComponent(compressedCode);
+      if (code) {
+        setSourceCode(code);
+      }
+    }
+  }
+
   function handleEditorChange(value: string | undefined) {
-    setSource(value || '');
+    const newSourceCode = value || '';
+    setSourceCode(newSourceCode);
+
+    // update URL fragment with the compressed source code
+    if (newSourceCode) {
+      const hash = newSourceCode
+        ? `#code=${lzstring.compressToEncodedURIComponent(newSourceCode)}`
+        : '';
+      window.history.replaceState({}, '', hash);
+      return;
+    }
+    window.history.replaceState({}, '', '#');
   }
 
   async function handleRun() {
-    const response = await run(source);
+    const response = await run(sourceCode);
     setConsole(response);
   }
 
   async function handleFormat() {
-    const formattedSource = await fmt(source);
-    setSource(formattedSource);
+    const formattedSource = await fmt(sourceCode);
+    setSourceCode(formattedSource);
   }
 
   function createSafeMarkup(): { __html: string } {
@@ -54,8 +79,9 @@ export default function Home(): JSX.Element {
               height="100%"
               defaultLanguage="typescript"
               defaultValue=""
-              value={source}
+              value={sourceCode}
               onChange={handleEditorChange}
+              onMount={handleEditorDidMount}
             />
           </section>
           <section className={styles.console}>
