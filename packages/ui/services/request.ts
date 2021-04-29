@@ -20,3 +20,13 @@ export function performRequest(
     body,
   }).then((res) => res.text());
 }
+
+export type ExampleId =
+  | 'hello-world'
+  | 'remote-import'
+  | 'fetch-data'
+  | 'subprocesses';
+
+export function getExampleSourceCode(exampleId: ExampleId): Promise<string> {
+  return fetch(`/examples/${exampleId}.ts`).then((res) => res.text());
+}

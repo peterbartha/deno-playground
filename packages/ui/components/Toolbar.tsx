@@ -1,21 +1,25 @@
 import {
   Button,
   createMuiTheme,
+  Menu,
+  MenuItem,
   Snackbar,
   ThemeProvider,
 } from '@material-ui/core';
-import { PlayArrow } from '@material-ui/icons';
+import { ExpandMore, PlayArrow } from '@material-ui/icons';
 import { Alert } from '@material-ui/lab';
 import React, { useCallback } from 'react';
 import { useClipboard } from 'use-clipboard-copy';
+import { ExampleId, getExampleSourceCode } from '../services/request';
 import styles from '../styles/Toolbar.module.scss';
 
 type Props = {
   onRun: () => void;
   onFormat: () => void;
+  onLoadExample: (sourceCode: string) => void;
 };
 
-const Toolbar = ({ onRun, onFormat }: Props): JSX.Element => {
+const Toolbar = ({ onRun, onFormat, onLoadExample }: Props): JSX.Element => {
   const [alertReason, setAlertReason] = React.useState<string>('');
 
   const handleSnackClose = (event?: React.SyntheticEvent, reason?: string) => {
@@ -66,6 +70,31 @@ const Toolbar = ({ onRun, onFormat }: Props): JSX.Element => {
   const handleShare = useCallback(() => {
     clipboard.copy(window.location.href);
   }, [clipboard]);
+
+  const [exampleAnchor, setExampleAnchor] = React.useState<null | HTMLElement>(
+    null
+  );
+
+  const openExamples = (event: React.MouseEvent<HTMLElement>) => {
+    setExampleAnchor(event.currentTarget);
+  };
+
+  const closeExamples = () => {
+    setExampleAnchor(null);
+  };
+
+  const loadExample = async (id: ExampleId) => {
+    closeExamples();
+    const exampleSourceCode = await getExampleSourceCode(id);
+    onLoadExample(exampleSourceCode);
+  };
+
+  const examples = new Map<ExampleId, string>([
+    ['hello-world', 'Hello World'],
+    ['remote-import', 'Remote import'],
+    ['fetch-data', 'Fetch data'],
+    ['subprocesses', 'Subprocesses'],
+  ]);
 
   const theme = createMuiTheme({
     palette: {
@@ -120,6 +149,30 @@ const Toolbar = ({ onRun, onFormat }: Props): JSX.Element => {
       >
         {alertReason ? alerts.get(alertReason) : undefined}
       </Snackbar>
+
+      <Button
+        aria-controls="simple-menu"
+        aria-haspopup="true"
+        onClick={openExamples}
+        variant="outlined"
+        color="primary"
+        endIcon={<ExpandMore />}
+      >
+        Examples
+      </Button>
+
+      <Menu
+        anchorEl={exampleAnchor}
+        keepMounted
+        open={Boolean(exampleAnchor)}
+        onClose={closeExamples}
+      >
+        {Array.from(examples.entries()).map(([id, name]) => (
+          <MenuItem onClick={() => loadExample(id)} key={id}>
+            {name}
+          </MenuItem>
+        ))}
+      </Menu>
 
       {/*
       <Button

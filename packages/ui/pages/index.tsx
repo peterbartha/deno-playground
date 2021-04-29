@@ -58,6 +58,10 @@ export default function Home(): JSX.Element {
     setProcessing(false);
   }
 
+  function loadExample(exampleSourceCode: string) {
+    setSourceCode(exampleSourceCode);
+  }
+
   function createSafeMarkup(): { __html: string } {
     const sanitizer = sanitizeHelper.current;
     if (!sanitizer) {
@@ -77,7 +81,11 @@ export default function Home(): JSX.Element {
       <Header />
 
       <main className={styles.main}>
-        <Toolbar onRun={handleRun} onFormat={handleFormat} />
+        <Toolbar
+          onRun={handleRun}
+          onFormat={handleFormat}
+          onLoadExample={loadExample}
+        />
         <div className={styles.playground}>
           <section className={styles.code}>
             <Editor
