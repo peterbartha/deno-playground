@@ -1,6 +1,13 @@
-import { Button, createMuiTheme, ThemeProvider } from '@material-ui/core';
+import {
+  Button,
+  createMuiTheme,
+  Snackbar,
+  ThemeProvider,
+} from '@material-ui/core';
 import { PlayArrow } from '@material-ui/icons';
-import React from 'react';
+import { Alert } from '@material-ui/lab';
+import React, { useCallback } from 'react';
+import { useClipboard } from 'use-clipboard-copy';
 import styles from '../styles/Toolbar.module.scss';
 
 type Props = {
@@ -9,14 +16,56 @@ type Props = {
 };
 
 const Toolbar = ({ onRun, onFormat }: Props): JSX.Element => {
+  const [alertReason, setAlertReason] = React.useState<string>('');
+
+  const handleSnackClose = (event?: React.SyntheticEvent, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setAlertReason('');
+  };
+
+  const alerts = new Map<string, JSX.Element>([
+    [
+      'copied',
+      <Alert onClose={handleSnackClose} severity="success" key="alert-copied">
+        URL copied to clipboard
+      </Alert>,
+    ],
+    [
+      'copyFailed',
+      <Alert
+        onClose={handleSnackClose}
+        severity="error"
+        key="alert-copy-failed"
+      >
+        Failed to copy URL
+      </Alert>,
+    ],
+  ]);
+
+  const clipboard = useClipboard({
+    onSuccess() {
+      setAlertReason('copied');
+    },
+    onError() {
+      setAlertReason('copyFailed');
+    },
+  });
+
   function handleRun(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
     onRun();
   }
+
   function handleFormat(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
     onFormat();
   }
+
+  const handleShare = useCallback(() => {
+    clipboard.copy(window.location.href);
+  }, [clipboard]);
 
   const theme = createMuiTheme({
     palette: {
@@ -60,6 +109,18 @@ const Toolbar = ({ onRun, onFormat }: Props): JSX.Element => {
         Format
       </Button>
 
+      <Button onClick={handleShare} variant="contained" color="primary">
+        Share
+      </Button>
+
+      <Snackbar
+        open={!!alertReason}
+        autoHideDuration={6000}
+        onClose={handleSnackClose}
+      >
+        {alertReason ? alerts.get(alertReason) : undefined}
+      </Snackbar>
+
       {/*
       <Button
         aria-controls="simple-menu"
@@ -93,10 +154,6 @@ const Toolbar = ({ onRun, onFormat }: Props): JSX.Element => {
         </MenuItem>
         <MenuItem onClick={handleShareClose}>Open in StackBlitz</MenuItem>
       </Menu>
-
-      <Button variant="contained" color="primary">
-        Share
-      </Button>
 
       <Button
         aria-controls="simple-menu"
