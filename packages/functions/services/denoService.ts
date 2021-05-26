@@ -23,6 +23,9 @@ export function executeCommand(
     command.add("--unstable");
   }
 
+  if (commandType === "run") {
+    command.add("--allow-all");
+  }
   command.add("-");
 
   return execute(Array.from(command), body);

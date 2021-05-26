@@ -20,6 +20,7 @@ const rawError = await p.stderrOutput();
 
 if (code === 0) {
   await Deno.stdout.write(rawOutput);
+  console.log(rawOutput);
 } else {
   const errorString = new TextDecoder().decode(rawError);
   console.log(errorString);
