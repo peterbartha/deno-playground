@@ -74,8 +74,31 @@ export default function Home(): JSX.Element {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>
+          Deno Playground - An online playground for expolring Deno and
+          TypeScript
+        </title>
         <link rel="icon" href="/favicon.ico" />
+
+        <meta name="author" content="Peter Bartha" />
+        <meta
+          name="description"
+          content="The Playground lets you write TypeScript online in a safe and sharable way on Deno runtime."
+        />
+        <meta
+          property="og:title"
+          content="Deno Playground - An online playground for expolring Deno and TypeScript"
+        />
+        <meta
+          property="og:description"
+          content="The Playground lets you write TypeScript online in a safe and sharable way on Deno runtime."
+        />
+        <meta
+          property="og:image"
+          content="https://deno-playground-peterbartha.vercel.app/deno-og-image.png"
+        />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
       </Head>
 
       <Header />
