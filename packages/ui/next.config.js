@@ -28,6 +28,8 @@ module.exports = (phase) => {
 
   // next.config.js object
   return {
+    basePath: '/deno-playground',
+    assetPrefix: 'https://deno-playground.peterbartha.com/deno-playground',
     env,
   };
 };
