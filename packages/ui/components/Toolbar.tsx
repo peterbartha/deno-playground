@@ -1,6 +1,6 @@
 import {
   Button,
-  createMuiTheme,
+  createTheme,
   Menu,
   MenuItem,
   Snackbar,
@@ -96,7 +96,7 @@ const Toolbar = ({ onRun, onFormat, onLoadExample }: Props): JSX.Element => {
     ['subprocesses', 'Subprocesses'],
   ]);
 
-  const theme = createMuiTheme({
+  const theme = createTheme({
     palette: {
       primary: {
         main: '#05A985',
