@@ -8,6 +8,7 @@ import Loading from '../components/Loading';
 import Toolbar from '../components/Toolbar';
 import fmt from '../services/fmt';
 import format from '../services/formatter';
+import { getExampleSourceCode } from '../services/request';
 import run from '../services/run';
 import styles from '../styles/Home.module.scss';
 
@@ -17,16 +18,17 @@ export default function Home(): JSX.Element {
   const [processing, setProcessing] = useState<boolean>(false);
   const sanitizeHelper = useRef<HTMLParagraphElement | null>(null);
 
-  function handleEditorDidMount() {
+  async function handleEditorDidMount() {
     const [_, hash] = window.location.hash.split('#');
     const params = new URLSearchParams(hash);
     const compressedCode = params.get('code');
+    let code = '';
     if (compressedCode) {
-      const code = lzstring.decompressFromEncodedURIComponent(compressedCode);
-      if (code) {
-        setSourceCode(code);
-      }
+      code = lzstring.decompressFromEncodedURIComponent(compressedCode) || '';
+    } else {
+      code = await getExampleSourceCode('default');
     }
+    setSourceCode(code);
   }
 
   function handleEditorChange(value: string | undefined) {

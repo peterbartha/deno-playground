@@ -22,6 +22,7 @@ export function performRequest(
 }
 
 export type ExampleId =
+  | 'default'
   | 'hello-world'
   | 'remote-import'
   | 'fetch-data'
