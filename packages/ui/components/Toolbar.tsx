@@ -208,28 +208,6 @@ const Toolbar = ({ onRun, onFormat, onLoadExample }: Props): JSX.Element => {
         <MenuItem onClick={handleShareClose}>Open in StackBlitz</MenuItem>
       </Menu>
 
-      <Button
-        aria-controls="simple-menu"
-        aria-haspopup="true"
-        onClick={handleClick}
-        variant="outlined"
-        color="primary"
-        endIcon={<ExpandMore />}
-      >
-        Examples
-      </Button>
-
-      <Menu
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-      >
-        <MenuItem onClick={handleClose}>Hello Land</MenuItem>
-        <MenuItem onClick={handleClose}>Import and export modules</MenuItem>
-        <MenuItem onClick={handleClose}>WebAssembly</MenuItem>
-      </Menu>
-
       <FormControlLabel
         control={
           <Switch

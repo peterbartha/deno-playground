@@ -41,9 +41,28 @@ a {
 }
 
 h1 {
-  @include typography.short-typography-level(typography.$config, title);
+  @include typography.short-typography-level(typography.$config, mobileTitle);
+
+  @media (min-width: 1024px) {
+    @include typography.short-typography-level(typography.$config, title);
+  }
 }
 
 h2 {
   @include typography.short-typography-level(typography.$config, subtitle);
+}
+
+.gutter {
+  background-repeat: no-repeat;
+  background-position: 50%;
+
+  &.gutter-horizontal {
+    cursor: col-resize;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
+  }
+
+  &.gutter-vertical {
+    cursor: row-resize;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFAQMAAABo7865AAAABlBMVEVHcEzMzMzyAv2sAAAAAXRSTlMAQObYZgAAABBJREFUeF5jOAMEEAIEEFwAn3kMwcB6I2AAAAAASUVORK5CYII=');
+  }
 }

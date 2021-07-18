@@ -1,7 +1,9 @@
 import Editor from '@monaco-editor/react';
 import lzstring from 'lz-string';
 import Head from 'next/head';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import Split from 'react-split';
+import useMatchMedia from 'use-match-media-hook';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
@@ -17,6 +19,7 @@ export default function Home(): JSX.Element {
   const [console, setConsole] = useState<string>('');
   const [processing, setProcessing] = useState<boolean>(false);
   const sanitizeHelper = useRef<HTMLParagraphElement | null>(null);
+  const [isLargeScreen] = useMatchMedia(['(min-width: 1024px)']);
 
   async function handleEditorDidMount() {
     const [_, hash] = window.location.hash.split('#');
@@ -129,7 +132,10 @@ export default function Home(): JSX.Element {
           onFormat={handleFormat}
           onLoadExample={loadExample}
         />
-        <div className={styles.playground}>
+        <Split
+          className={styles.playground}
+          direction={isLargeScreen === true ? 'horizontal' : 'vertical'}
+        >
           <section className={styles.code}>
             <Editor
               height="100%"
@@ -143,14 +149,17 @@ export default function Home(): JSX.Element {
           <section className={styles.console}>
             <h2>Console output:</h2>
             <p ref={sanitizeHelper} className={styles.sanitizer} />
-            {/* eslint-disable-next-line react/no-danger */}
+
+            {/* eslint-disable react/no-danger */}
             <samp
               dangerouslySetInnerHTML={createSafeMarkup()}
               className={processing ? styles.blur : ''}
             />
+            {/* eslint-enable react/no-danger */}
+
             {processing ? <Loading className={styles.loading} /> : null}
           </section>
-        </div>
+        </Split>
       </main>
 
       <Footer />

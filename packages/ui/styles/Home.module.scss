@@ -24,16 +24,15 @@
   width: 100%;
   padding: 2rem;
   overflow: hidden;
-  flex-direction: row;
+  flex-direction: column;
   background: #f4f5f7;
   border-top: 1px solid $deno-separator;
   flex: 1;
-  gap: 4rem;
-}
+  gap: 1rem;
 
-.code,
-.console {
-  flex: 1;
+  @media (min-width: 1024px) {
+    flex-direction: row;
+  }
 }
 
 .code {
