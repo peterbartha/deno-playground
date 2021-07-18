@@ -56,12 +56,34 @@ type FormattedSegment = {
   text: string;
 };
 
+/**
+ * Make more visible colors on a white background.
+ * Note: this function cannot transform background colors.
+ */
+function transformColor(color: string): string {
+  let result = color.toLowerCase();
+  if (color.includes('light')) {
+    result = color.replace(/light/, '');
+  }
+  // eslint-disable-next-line default-case
+  switch (result) {
+    case 'yellow':
+      result = 'darkorange';
+      break;
+
+    case 'cyan':
+      result = 'darkcyan';
+      break;
+  }
+  return result;
+}
+
 function toCSS(style: SegmentStyles): string {
   return (
     EXPLICIT_STYLES[style] ||
     (style.slice(0, 2) === 'bg' &&
       `background-color: ${style.slice(2).toLowerCase()};`) ||
-    `color: ${style};`
+    `color: ${transformColor(style)};`
   );
 }
 
