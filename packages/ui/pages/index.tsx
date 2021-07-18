@@ -55,9 +55,15 @@ export default function Home(): JSX.Element {
 
   async function handleFormat() {
     setProcessing(true);
-    const formattedSource = await fmt(sourceCode);
-    setSourceCode(formattedSource);
-    setProcessing(false);
+    let response = '';
+    try {
+      response = await fmt(sourceCode);
+      setSourceCode(response);
+    } catch (_err) {
+      setConsole(response);
+    } finally {
+      setProcessing(false);
+    }
   }
 
   function loadExample(exampleSourceCode: string) {
