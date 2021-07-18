@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable no-console, @typescript-eslint/no-var-requires */
 const { createServer } = require('https');
 const { parse } = require('url');
 const next = require('next');
