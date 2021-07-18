@@ -32,7 +32,9 @@ export function getExampleSourceCode(exampleId: ExampleId): Promise<string> {
   const { origin } = window.location;
   return fetch(
     `${
-      origin.includes('localhost') ? '' : '/deno-playground'
-    }/examples/${exampleId}.ts`
+      origin.includes('localhost')
+        ? '/'
+        : 'https://deno-playground.peterbartha.com/deno-playground/'
+    }examples/${exampleId}.ts`
   ).then((res) => res.text());
 }
