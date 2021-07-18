@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable no-console, @typescript-eslint/no-var-requires */
 const {
   PHASE_DEVELOPMENT_SERVER,
   PHASE_PRODUCTION_BUILD,
@@ -30,10 +30,30 @@ module.exports = (phase) => {
 
   // next.config.js object
   return {
-    basePath: isDev ? '' : `${BASE_PATH}`,
+    basePath: isDev ? undefined : `${BASE_PATH}`,
     assetPrefix: isDev
-      ? `https://localhost:${process.env.PORT}`
+      ? undefined
       : `https://deno-playground.peterbartha.com${BASE_PATH}`,
     env,
+
+    webpack(config) {
+      config.module.rules.push({
+        test: /\.svg$/i,
+        issuer: { and: [/\.(js|ts|md)x?$/] },
+        use: [
+          {
+            loader: '@svgr/webpack',
+            options: {
+              prettier: false,
+              svgo: false,
+              svgoConfig: { plugins: [{ removeViewBox: false }] },
+              titleProp: true,
+            },
+          },
+        ],
+      });
+
+      return config;
+    },
   };
 };
