@@ -5,22 +5,12 @@ import DenoLogo from '../assets/deno-logo.svg';
 const Footer = (): JSX.Element => (
   <footer className={styles.footer}>
     Powered by
-    <a
-      href="https://vercel.com"
-      target="_blank"
-      rel="noopener noreferrer"
-      className={styles.vercelLogo}
-    >
-      <VercelLogo />
+    <a href="https://vercel.com" target="_blank" rel="noopener noreferrer">
+      <VercelLogo className={styles.vercelLogo} />
     </a>
     and
-    <a
-      href="https://deno.land"
-      target="_blank"
-      rel="noopener noreferrer"
-      className={styles.denoLogo}
-    >
-      <DenoLogo />
+    <a href="https://deno.land" target="_blank" rel="noopener noreferrer">
+      <DenoLogo className={styles.denoLogo} />
     </a>
   </footer>
 );
