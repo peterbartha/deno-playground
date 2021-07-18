@@ -18,7 +18,12 @@ export function performRequest(
     },
     method: 'POST',
     body,
-  }).then((res) => res.text());
+  }).then(async (res) => {
+    if (!res.ok) {
+      throw new Error(await res.text());
+    }
+    return res.text();
+  });
 }
 
 export type ExampleId =

@@ -48,19 +48,23 @@ export default function Home(): JSX.Element {
 
   async function handleRun() {
     setProcessing(true);
-    const response = await run(sourceCode);
+    let response = '';
+    try {
+      response = await run(sourceCode);
+    } catch (err) {
+      response = err;
+    }
     setConsole(response);
     setProcessing(false);
   }
 
   async function handleFormat() {
     setProcessing(true);
-    let response = '';
     try {
-      response = await fmt(sourceCode);
+      const response = await fmt(sourceCode);
       setSourceCode(response);
-    } catch (_err) {
-      setConsole(response);
+    } catch (err) {
+      setConsole(err);
     } finally {
       setProcessing(false);
     }
