@@ -1,9 +1,9 @@
 import Editor from '@monaco-editor/react';
 import lzstring from 'lz-string';
 import Head from 'next/head';
-import React, { useEffect, useRef, useState } from 'react';
-import Split from 'react-split';
+import React, { useRef, useState } from 'react';
 import useMatchMedia from 'use-match-media-hook';
+import Split from 'react-split';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
@@ -162,7 +162,7 @@ export default function Home(): JSX.Element {
         </Split>
       </main>
 
-      <Footer />
+      {isLargeScreen ? <Footer /> : null}
     </div>
   );
 }
