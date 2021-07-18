@@ -1769,11 +1769,6 @@ anymatch@^3.1.1, anymatch@~3.1.1, anymatch@~3.1.2:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
-arg@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/arg/-/arg-5.0.0.tgz#a20e2bb5710e82950a516b3f933fee5ed478be90"
-  integrity sha512-4P8Zm2H+BRS+c/xX1LrHw0qKpEhdlZjLCgWy+d78T9vqa2Z2SiD2wMrYuWIAFy5IZUD7nnNXroRttz+0RzlrzQ==
-
 argparse@^1.0.7:
   version "1.0.10"
   resolved "https://registry.yarnpkg.com/argparse/-/argparse-1.0.10.tgz#bcd6791ea5ae09725e17e5ad988134cd40b3d911"
@@ -5371,11 +5366,6 @@ quick-lru@^4.0.1:
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-4.0.1.tgz#5b8878f113a58217848c6482026c73e1ba57727f"
   integrity sha512-ARhCpm70fzdcvNQfPoy49IaanKkTlRWF2JMzqhcJbhSFRZv7nPTvZJdcY7301IPmvW+/p0RgIWnQDLJxifsQ7g==
 
-ramda@^0.27.1:
-  version "0.27.1"
-  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.27.1.tgz#66fc2df3ef873874ffc2da6aa8984658abacf5c9"
-  integrity sha512-PgIdVpn5y5Yns8vqb8FzBUEYn98V3xcPgawAkkgj0YJ0qDsnHCiNmZYfOGMgOvoB0eWFLpYbhxUR3mxfDIMvpw==
-
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/randombytes/-/randombytes-2.1.0.tgz#df6f84372f0270dc65cdf6291349ab7a473d4f2a"
@@ -5801,11 +5791,6 @@ shebang-regex@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/shebang-regex/-/shebang-regex-3.0.0.tgz#ae16f1644d873ecad843b0307b143362d4c42172"
   integrity sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==
-
-shell-args@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/shell-args/-/shell-args-1.0.0.tgz#4df052e9f0e9ae61a883624e73a2ceddfd96805e"
-  integrity sha512-gCv9fh2pQA/BW3F5IOuKwomE+hoADCl6e+FmxqzF7oz6IKUMOajWTnVazvQJwiu2heKyqRwVgoHGb6U9jqasNg==
 
 shell-quote@1.7.2:
   version "1.7.2"
@@ -6648,15 +6633,12 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-vercel-deno@0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/vercel-deno/-/vercel-deno-0.8.0.tgz#67fa7d8278335ff87a6c587513e99fcfa593069e"
-  integrity sha512-ip89Go4M1kaPKmtZskFRRc8++63jc4vdRqjwJA05tPLYz4E9RW9eOxdh67gPHV2yxPis2gORaBpjPpexvDTS3w==
+vercel-deno@0.7.13:
+  version "0.7.13"
+  resolved "https://registry.yarnpkg.com/vercel-deno/-/vercel-deno-0.7.13.tgz#f8e84805d9ca08549eebaf48189b2ffe9b264930"
+  integrity sha512-LCBGVaE7S6+EnrDz677K/gPvkg9aV78wjdftZ+KN7Xu//YkLfr87opDioXWmDiebyCNrRBLiPcgDuLwDbevtgQ==
   dependencies:
     "@tootallnate/once" "^1.1.2"
-    arg "^5.0.0"
-    ramda "^0.27.1"
-    shell-args "^1.0.0"
     yn "^4.0.0"
 
 vfile-message@^2.0.0:
