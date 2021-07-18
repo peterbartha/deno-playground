@@ -90,7 +90,15 @@ export default function Home(): JSX.Element {
           Deno Playground - An online playground for expolring Deno and
           TypeScript
         </title>
-        <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="icon"
+          href="https://deno-playground.peterbartha.com/deno-playground/favicon.svg"
+          type="image/svg+xml"
+        />
+        <link
+          rel="icon"
+          href="https://deno-playground.peterbartha.com/deno-playground/favicon.ico"
+        />
 
         <meta name="author" content="Peter Bartha" />
         <meta

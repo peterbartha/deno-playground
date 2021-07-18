@@ -22,7 +22,6 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <meta name="theme-color" content="#161e2e" />
-          <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
