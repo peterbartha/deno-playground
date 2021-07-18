@@ -29,5 +29,10 @@ export type ExampleId =
   | 'subprocesses';
 
 export function getExampleSourceCode(exampleId: ExampleId): Promise<string> {
-  return fetch(`/examples/${exampleId}.ts`).then((res) => res.text());
+  const { origin } = window.location;
+  return fetch(
+    `${
+      origin.includes('localhost') ? '' : '/deno-playground'
+    }/examples/${exampleId}.ts`
+  ).then((res) => res.text());
 }
