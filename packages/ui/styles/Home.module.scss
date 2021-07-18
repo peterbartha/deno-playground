@@ -67,6 +67,10 @@
     border-radius: $border-radius;
   }
 
+  .blur {
+    filter: blur(2px);
+  }
+
   .loading {
     position: absolute;
     top: 50%;

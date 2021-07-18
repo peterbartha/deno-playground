@@ -132,7 +132,10 @@ export default function Home(): JSX.Element {
             <h2>Console output:</h2>
             <p ref={sanitizeHelper} className={styles.sanitizer} />
             {/* eslint-disable-next-line react/no-danger */}
-            <samp dangerouslySetInnerHTML={createSafeMarkup()} />
+            <samp
+              dangerouslySetInnerHTML={createSafeMarkup()}
+              className={processing ? styles.blur : ''}
+            />
             {processing ? <Loading className={styles.loading} /> : null}
           </section>
         </div>
