@@ -13,6 +13,7 @@ import format from '../services/formatter';
 import { getExampleSourceCode } from '../services/request';
 import run from '../services/run';
 import styles from '../styles/Home.module.scss';
+import { makeMarkdownFrom } from '../services/markdown';
 
 export default function Home(): JSX.Element {
   const [sourceCode, setSourceCode] = useState<string>('');
@@ -73,6 +74,15 @@ export default function Home(): JSX.Element {
     }
   }
 
+  async function generateMarkdown(): Promise<string> {
+    const output = await run(sourceCode);
+    return makeMarkdownFrom(sourceCode, output);
+  }
+
+  function accessSource(): string {
+    return sourceCode;
+  }
+
   function loadExample(exampleSourceCode: string) {
     setSourceCode(exampleSourceCode);
   }
@@ -130,6 +140,8 @@ export default function Home(): JSX.Element {
         <Toolbar
           onRun={handleRun}
           onFormat={handleFormat}
+          onGenerateMarkdown={generateMarkdown}
+          onAccessSource={accessSource}
           onLoadExample={loadExample}
         />
         <Split
