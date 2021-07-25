@@ -1,6 +1,6 @@
 {
   "name": "deno-playground-api",
-  "version": "0.1.0",
+  "version": "0.7.0",
   "description": "The back-end API of Deno Playground.",
   "repository": "git@github.com:peterbartha/deno-playground.git",
   "author": "Peter Bartha <mail@peterbartha.com>",
