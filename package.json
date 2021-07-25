@@ -1,6 +1,6 @@
 {
   "name": "deno-playground",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "The Deno Playground lets you write Deno code online in a safe and sharable way.",
   "repository": "git@github.com:peterbartha/deno-playground.git",
   "author": "Peter Bartha <mail@peterbartha.com>",
