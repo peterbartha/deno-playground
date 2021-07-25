@@ -16,6 +16,7 @@ import { Alert } from '@material-ui/lab';
 import React, { useCallback } from 'react';
 import lzstring from 'lz-string';
 import { useClipboard } from 'use-clipboard-copy';
+import useMatchMedia from 'use-match-media-hook';
 import { ExampleId, getExampleSourceCode } from '../services/request';
 import styles from '../styles/Toolbar.module.scss';
 import {
@@ -55,6 +56,7 @@ const Toolbar = ({
   const [_dialogType, setDialogType] = React.useState<'code'>('code');
   const dialogElementRef = React.useRef<HTMLElement>(null);
   const textareaRef = React.useRef<HTMLTextAreaElement>(null);
+  const [isLargeScreen] = useMatchMedia(['(min-width: 768px)']);
 
   const dialogRendered = () => {
     const textarea = textareaRef?.current;
@@ -349,46 +351,42 @@ const Toolbar = ({
         {alertReason ? alerts.get(alertReason) : undefined}
       </Snackbar>
 
-      <Button
-        aria-controls="simple-menu"
-        aria-haspopup="true"
-        onClick={openExport}
-        variant="contained"
-        color="primary"
-        endIcon={<ExpandMore />}
-      >
-        Export
-      </Button>
+      {isLargeScreen ? (
+        <>
+          <Button
+            aria-controls="simple-menu"
+            aria-haspopup="true"
+            onClick={openExport}
+            variant="contained"
+            color="primary"
+            endIcon={<ExpandMore />}
+          >
+            Export
+          </Button>
 
-      <Menu
-        anchorEl={exportAnchor}
-        keepMounted
-        open={Boolean(exportAnchor)}
-        onClose={closeExport}
-      >
-        <MenuItem onClick={copyAsMarkdownIssue}>
-          Copy as Markdown Issue
-        </MenuItem>
-        <MenuItem onClick={copyAsMarkdownLink}>Copy as Markdown Link</MenuItem>
-        <MenuItem onClick={copyAsMarkdownLinkWithPreview}>
-          Copy as Markdown Link with preview
-        </MenuItem>
-        <hr />
-        <MenuItem onClick={openInASTViewer}>
-          Open in TypeScript AST viewer
-        </MenuItem>
-        <MenuItem onClick={openInStackBlitz}>Open in StackBlitz</MenuItem>
-        {/*
-        <MenuItem onClick={copyAsMarkdownLink}>Copy as Markdown Link</MenuItem>
-        <MenuItem onClick={copyAsMarkdownLinkPreview}>
-          Copy as Markdown Link with preview
-        </MenuItem>
-        <hr />
-        <MenuItem onClick={openInASTViewer}>
-          Open in TypeScript AST viewer
-        </MenuItem>
-<MenuItem onClick={openInStackBlitz}>Open in StackBlitz</MenuItem> */}
-      </Menu>
+          <Menu
+            anchorEl={exportAnchor}
+            keepMounted
+            open={Boolean(exportAnchor)}
+            onClose={closeExport}
+          >
+            <MenuItem onClick={copyAsMarkdownIssue}>
+              Copy as Markdown Issue
+            </MenuItem>
+            <MenuItem onClick={copyAsMarkdownLink}>
+              Copy as Markdown Link
+            </MenuItem>
+            <MenuItem onClick={copyAsMarkdownLinkWithPreview}>
+              Copy as Markdown Link with preview
+            </MenuItem>
+            <hr />
+            <MenuItem onClick={openInASTViewer}>
+              Open in TypeScript AST viewer
+            </MenuItem>
+            <MenuItem onClick={openInStackBlitz}>Open in StackBlitz</MenuItem>
+          </Menu>
+        </>
+      ) : null}
 
       <Button
         aria-controls="simple-menu"
