@@ -1,7 +1,7 @@
 import Editor from '@monaco-editor/react';
 import lzstring from 'lz-string';
 import Head from 'next/head';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import useMatchMedia from 'use-match-media-hook';
 import Split from 'react-split';
 import Footer from '../components/Footer';
@@ -21,6 +21,14 @@ export default function Home(): JSX.Element {
   const [processing, setProcessing] = useState<boolean>(false);
   const sanitizeHelper = useRef<HTMLParagraphElement | null>(null);
   const [isLargeScreen] = useMatchMedia(['(min-width: 1024px)']);
+  const isInitial = useRef<boolean>(true);
+
+  useEffect(() => {
+    if (!isInitial.current) {
+      window.location.reload();
+    }
+    isInitial.current = false;
+  }, [isLargeScreen]);
 
   async function handleEditorDidMount() {
     const [_, hash] = window.location.hash.split('#');
