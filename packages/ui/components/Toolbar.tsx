@@ -52,7 +52,7 @@ const Toolbar = ({
     title: string;
     message: string;
   }>({ title: '', message: '' });
-  const [dialogType, setDialogType] = React.useState<'code'>('code');
+  const [_dialogType, setDialogType] = React.useState<'code'>('code');
   const dialogElementRef = React.useRef<HTMLElement>(null);
   const textareaRef = React.useRef<HTMLTextAreaElement>(null);
 
