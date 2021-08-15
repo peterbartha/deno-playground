@@ -108,7 +108,7 @@ export default function Home(): JSX.Element {
     <div className={styles.container}>
       <Head>
         <title>
-          Deno Playground - An online playground for expolring Deno and
+          Deno Playground - An online playground for exploring Deno and
           TypeScript
         </title>
         <link
@@ -128,7 +128,7 @@ export default function Home(): JSX.Element {
         />
         <meta
           property="og:title"
-          content="Deno Playground - An online playground for expolring Deno and TypeScript"
+          content="Deno Playground - An online playground for exploring Deno and TypeScript"
         />
         <meta
           property="og:description"
