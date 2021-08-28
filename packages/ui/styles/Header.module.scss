@@ -12,6 +12,8 @@
 
   .deno {
     display: inline-flex;
+    color: $deno-black;
+    border: 0;
     align-items: center;
 
     svg {

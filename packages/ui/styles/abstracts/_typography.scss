@@ -29,7 +29,8 @@
   $body: define-typography-level(1.4rem, 1.4, $font-regular),
   $title: define-typography-level(3rem, 1.2, $font-bold),
   $mobileTitle: define-typography-level(2rem, 1.2, $font-bold),
-  $subtitle: define-typography-level(1.6rem, 1.2, $font-regular)
+  $subtitle: define-typography-level(1.6rem, 1.2, $font-regular),
+  $mobileSubtitle: define-typography-level(1.2rem, 1.2, $font-regular)
 ) {
   // Declare an initial map with all of the levels.
   $config: (
@@ -37,6 +38,7 @@
     title: $title,
     mobileTitle: $mobileTitle,
     subtitle: $subtitle,
+    mobileSubtitle: $mobileSubtitle,
   );
 
   // Loop through the levels and set the `font-family` of the ones that don't have one to the base.

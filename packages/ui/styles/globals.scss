@@ -36,8 +36,10 @@ body {
 }
 
 a {
-  color: inherit;
+  font-weight: 600;
+  color: $deno-blue;
   text-decoration: none;
+  border-bottom: 1px dotted $deno-blue;
 }
 
 h1 {
@@ -49,7 +51,14 @@ h1 {
 }
 
 h2 {
-  @include typography.short-typography-level(typography.$config, subtitle);
+  @include typography.short-typography-level(
+    typography.$config,
+    mobileSubtitle
+  );
+
+  @media (min-width: 1024px) {
+    @include typography.short-typography-level(typography.$config, subtitle);
+  }
 }
 
 .gutter {
