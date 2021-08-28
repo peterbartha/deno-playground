@@ -1,8 +1,16 @@
-import { ThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider, withStyles } from '@material-ui/core/styles';
 import { AppProps } from 'next/dist/next-server/lib/router/router';
 import React from 'react';
 import '../styles/globals.scss';
 import theme from '../styles/theme';
+
+const GlobalCss = withStyles({
+  '@global': {
+    '.MuiAlert-root': {
+      fontSize: '1.4rem',
+    },
+  },
+})(() => null);
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   React.useEffect(() => {
@@ -15,6 +23,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
 
   return (
     <ThemeProvider theme={theme}>
+      <GlobalCss />
       <Component {...pageProps} />
     </ThemeProvider>
   );
